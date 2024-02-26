@@ -1,13 +1,23 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "BYekan" !important;
+  background-color: turquoise;
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.App {
+  text-align: center;
+}
+.input-in-app {
+  height: 25px;
+  padding: 0.2em;
+  margin: 0.4em;
+  width: 250px;
+  font-family: "BYekan";
+  font-weight: bold;
+}
+.button-in-app {
+  background-color: #4689e0;
+  padding: 0.2em;
+  width: 95px;
+  height: 35px;
+  font-family: "BYekan";
+  font-weight: bold;
 }
