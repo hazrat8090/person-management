@@ -19,7 +19,6 @@ class App extends Component {
     const worksArray = Object.values(works);
     const filteredWorks = worksArray.filter((p) => p.id !== id);
     this.setState({ works: filteredWorks });
-    alert("پروژه تکمیل و آماده است");
   };
 
   handleChangeWorkName = (event, id) => {

@@ -24,6 +24,15 @@
   font-weight: bold;
 }
 .button-in-work-todo {
+  background-color: lime;
+  padding: 0.2em auto;
+  margin: 0.5em;
+  width: 75px;
+  height: 35px;
+  font-family: "BYekan";
+  font-weight: bold;
+}
+.button-in-work-delete {
   background-color: #6be3d3;
   padding: 0.2em auto;
   margin: 0.5em;
