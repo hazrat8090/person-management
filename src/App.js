@@ -2,12 +2,14 @@ import React from "react";
 import { Component } from "react";
 import "./index.css";
 import Works from "./components/work/Works";
+import { Alert, Button } from "react-bootstrap";
+import { ToastContainer, toast } from "react-toastify";
 
 class App extends Component {
   state = {
     works: [],
     work: "",
-    showWorks: false,
+    showWorks: true,
   };
 
   handleShowWorks = () => {
@@ -19,6 +21,14 @@ class App extends Component {
     const worksArray = Object.values(works);
     const filteredWorks = worksArray.filter((p) => p.id !== id);
     this.setState({ works: filteredWorks });
+
+    const workIndex = worksArray.findIndex((p) => p.id === id);
+    const work = worksArray[workIndex];
+    toast.error(`${work.title} با موفقیت حذف شد`, {
+      position: "top-right",
+      onClose: true,
+      closeButton: true,
+    });
   };
 
   handleChangeWorkName = (event, id) => {
@@ -38,8 +48,16 @@ class App extends Component {
       id: Math.floor(Math.random() * 100),
       title: this.state.work,
     };
-    works.push(work);
-    this.setState({ works, work: "" });
+    if (work.title !== "" && work.title !== " ") {
+      works.push(work);
+      this.setState({ works, work: "" });
+
+      toast.success("کار جدیدی اضافه شد", {
+        position: "bottom-right",
+        onClose: true,
+        closeButton: true,
+      });
+    }
   };
 
   setWork = (event) => {
@@ -64,36 +82,59 @@ class App extends Component {
       );
     }
 
-    const buttonStyle = {
-      padding: "0.5em",
-      fontFamily: "BYekan",
-      fontWeight: "bold",
-      margin: "0.8em",
-      backgroundColor: "lime",
-    };
+    let badgeStyle = [];
+    if (works.length >= 3) badgeStyle.push("badge-success");
+    if (works.length === 2) badgeStyle.push("badge-warning");
+    if (works.length <= 1) badgeStyle.push("badge-danger");
 
     return (
-      <div className="App">
-        <h1>سلام من به مردم غزه</h1>
-        <h2>مدیریت کننده کار های روز مره من {works.length}</h2>
-        <div>
-          <input
-            className="input-in-app"
-            type="text"
-            style={{ direction: "rtl" }}
-            placeholder="کار جدیدرا اضافه کن"
-            value={this.state.work}
-            onChange={this.setWork}
-          />
-          <button className="button-in-app" onClick={this.handleAddNewWork}>
-            اضافه کردن کار
-          </button>
+      <div className="rtl text-center">
+        <Alert variant="info">
+          <h1>سلام من به مردم غزه</h1>
+        </Alert>
+
+        <h5 className="alert alert-dark">
+          {" "}
+          تعداد کار های روز مره من{" "}
+          <span className={`badge badge-pill ${badgeStyle.join("")}`}>
+            {" "}
+            {works.length}{" "}
+          </span>{" "}
+          کار میباشد
+        </h5>
+
+        <div className="m-2 p-2">
+          <form
+            className="form-inline justify-content-center abs"
+            onSubmit={(event) => event.preventDefault()}
+          >
+            <div className="input-group w-25">
+              <input
+                className="form-control"
+                type="text"
+                style={{ direction: "rtl" }}
+                placeholder="کار جدیدرا اضافه کن"
+                value={this.state.work}
+                onChange={this.setWork}
+              />
+              <div className="input-group-prepend">
+                <button
+                  onClick={this.handleAddNewWork}
+                  className="btn btn-sm btn-success fa fa-plus-square"
+                ></button>
+              </div>
+            </div>
+          </form>
         </div>
-        <button onClick={this.handleShowWorks} style={buttonStyle}>
+        <Button
+          onClick={this.handleShowWorks}
+          variant={showWorks ? "info" : "danger"}
+        >
           نمایش کار ها
-        </button>
+        </Button>
 
         {work}
+        <ToastContainer />
       </div>
     );
   }
