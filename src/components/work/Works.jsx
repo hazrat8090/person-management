@@ -1,19 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import Work from "./Work";
+import SimpleContext from "../context/SimpleContext";
 
-const Works = ({ works, deleteWork, changeWork, workTodo }) => {
+const Works = () => {
+  const context = useContext(SimpleContext);
   return (
     <div>
-      {works &&
-        works.map((work) => (
-          <Work
-            key={work.id}
-            title={work.title}
-            deleteWork={() => deleteWork(work.id)}
-            changeWork={(event) => changeWork(event, work.id)}
-            workTodo={workTodo}
-          />
-        ))}
+      {context.works.map((work) => (
+        <Work
+          key={work.id}
+          title={work.title}
+          deleteWork={() => context.handleDeleteWork(work.id)}
+          changeWork={(event) => context.handleChangeWorkName(event, work.id)}
+        />
+      ))}
     </div>
   );
 };
