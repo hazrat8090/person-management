@@ -1,11 +1,19 @@
 import React from "react";
 import { Alert } from "react-bootstrap";
 import SimpleContext from "../context/SimpleContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
-const Header = ({ appTitle }) => {
+const Header = () => {
+  console.log("header rendred ");
   const headerContext = useContext(SimpleContext);
-  const works = headerContext;
+  const { works, appTitle } = headerContext.state;
+
+  useEffect(() => {
+    console.log("useEffect rendred");
+    setTimeout(() => {
+      alert("data has been saved");
+    }, 100);
+  }, [works]);
 
   let badgeStyle = [];
   if (works.length >= 3) {
@@ -25,7 +33,7 @@ const Header = ({ appTitle }) => {
       <Alert variant="light">
         تعداد کارهای روز مره من
         <span className={`badge badge-pill ${badgeStyle.join("")}`}>
-          {headerContext.works.length}
+          {works.length}
         </span>
         میباشد
       </Alert>

@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import SimpleContext from "../context/SimpleContext";
 
 const NewWork = () => {
+  console.log("new work rendred");
   const context = useContext(SimpleContext);
   return (
     <div className="m-2 p-2">
@@ -15,8 +16,8 @@ const NewWork = () => {
             type="text"
             style={{ direction: "rtl" }}
             placeholder="کار جدیدرا اضافه کن"
-            value={context.work} // Accessing context.work directly
-            onChange={(event) => context.setWork(event.target.value)} // Setting the value directly
+            value={context.state.work} // Accessing context.work directly
+            onChange={context.setWork} // Setting the value directly
           />
           <div className="input-group-prepend">
             <button
