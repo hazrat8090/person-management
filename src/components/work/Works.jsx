@@ -3,15 +3,15 @@ import Work from "./Work";
 
 class Works extends PureComponent {
   render() {
-    const { handleDeleteWork, handleChangeWorkName, works } = this.props;
+    const { works, deleteWork, changeWork } = this.props;
     return (
       <div>
         {works.map((work) => (
           <Work
             key={work.id}
             title={work.title}
-            deleteWork={() => handleDeleteWork(work.id)}
-            changeWork={(event) => handleChangeWorkName(event, work.id)}
+            deleteWork={() => deleteWork(work.id)}
+            changeWork={(event) => changeWork(event, work.id)}
           />
         ))}
       </div>

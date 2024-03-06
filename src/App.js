@@ -103,7 +103,13 @@ class App extends Component {
     let work;
     let header;
     if (showWorks) {
-      work = <Works />;
+      work = (
+        <Works
+          works={this.state.works} // Pass works as prop to Works component
+          deleteWork={this.handleDeleteWork} // Pass deleteWork function as prop
+          changeWork={this.handleChangeWorkName} // Pass changeWork function as prop
+        />
+      );
     }
 
     if (showHeader) {
